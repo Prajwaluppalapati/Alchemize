@@ -1,6 +1,10 @@
+---
+title: Introduction to Alchemize
+description: Introduction to the Alchemize YSWS Hack Club
+
 # Welcome to Alchemize!
 ## The Basic Idea
-Alchemize is a ysws event where all participants get 3 themes, and they work on those 3 themes to get currencies, which they can spend on the shop. In those 3 themes, each theme has it's own currency, and participants combine those currencies to get a bonus (we made sure it doesn't exceed $5/h). The combined currency gives a different currency called Potion Mix they can use to buy items from the shop. 
+Alchemize is a YSWS(You Ship, We Ship) event under Hack Club(a non-profit organization) by teens for teens where all participants get 3 themes, and they work on those 3 themes to get currencies, which they can spend on the shop. In those 3 themes, each theme has it's own currency, and participants combine those currencies to get a bonus. The combined currency gives a different currency called Potion Mix they can use to buy items from the shop. 
 
 ## The Season System
 Each season unlocks after the code time of all participants together reaches the cutoff hours (maybe 400 hours for the 2nd season to unlock). Basically, a mystery box which all participants together open with their coding hours. Maybe we can adjust the cutoff hours by observing the amount of participation, such that each season lasts for at least 2 - 3 weeks.
