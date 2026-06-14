@@ -13,6 +13,5 @@ Download the Epic Games Launcher from [unrealengine.com](https://www.unrealengin
 1. Open the Epic Games Launcher and click **Launch**.
 2. The Unreal Project Browser will open. Choose a template (Blank, Third Person, First Person, etc).
 3. Set your project to **Blueprint** (easier for beginners) or **C++**.
-4. Enable **Starter Content** — it includes free meshes, materials, and textures to experiment with.
-5. Choose a project name and folder.
-6. Click **Create**.
+4. Choose a project name and folder.
+5. Click **Create**.
