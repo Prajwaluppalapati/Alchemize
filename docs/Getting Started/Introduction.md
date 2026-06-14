@@ -1,6 +1,7 @@
 ---
 title: Introduction to Alchemize
 description: Introduction to the Alchemize YSWS Hack Club
+---
 
 # Welcome to Alchemize!
 ## The Basic Idea
