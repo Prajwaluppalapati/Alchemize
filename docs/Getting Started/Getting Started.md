@@ -1,3 +1,8 @@
+---
+title: Getting Started
+description: Getting Started in Alchemize
+---
+
 # Getting started
 
 ## What is Hack Club?
