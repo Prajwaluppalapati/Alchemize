@@ -1,3 +1,8 @@
+---
+title: Docs Index - Alchemize
+description: Index of Docs
+---
+
 # Welcome to Alchemize!
 
 Alchemize is a Hack Club YSWS (You ship, we ship) program where teens(13-18) like yourself can make different type projects, and get things from the shop!
