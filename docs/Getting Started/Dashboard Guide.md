@@ -46,3 +46,7 @@ This button leads you to a place where you can mix your currencies (Redstone, Aq
 After you open the trade portal, you will find 3 textboxes; this is where you enter the amount of theme currencies you have earned. 
 Enter the amount of currency of your wish (within the amount of currency you have earned). 
 If you own 2 or more currencies, enter them and try combinations which convert to a larger portion of the potion mix. When you find the perfect combination, click on the convert button in the centre of the screen. You can then use the potion mix for non-themed items.
+
+## Refer
+Use this button to get a unique link to refer your friend to Alchemize
+--IDK about the prizes for referring someone, pls write this--
