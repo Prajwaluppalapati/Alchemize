@@ -52,7 +52,7 @@ What this essentially does is whenever you open your project again, it will alwa
 
 ## The Editor Interface
  
-### Viewport
+### **Viewport**
 
 The 3D scene view. This is where you preview most of your stuff and build your level. To navigate around your 3D viewport, you can hold **Right Mouse Button** and move around using WASD using your mouse to look around. Alternately you can hold down the **Left Mouse Button** and move your mouse to move around but that is less accurate
 
@@ -77,18 +77,70 @@ or you can **hold ALT while moving an object** to duplicate
 All level design is done in the viewport, it depends on how you wanna make your game.
 
 
-### Outliner
+### **Outliner**
+
 The outliner is this tab over here, it lists all the characters in your current level
 ![Outliner]({521EDF2B-FADE-4F38-80ED-66FD5EAC50C5}.png)
 
 It allows you to select your objects and view them in the details panel
 
 ### Note: My UE5 Layout might differ from yours, you can simply move windows around you by clicking on their tabs
+![Outliner](WindowDocking.gif)
+
+### **Details Panel**
+
+The details panel is an important window, 
+It is where we can view and change the properties of an object like size, location, rotation
+Shape, texture and any other properties we may link
+
+![Outliner](DetailsPanel.gif)
 
 
-### Details Panel
-Located in the bottom right. Shows the selected Actor's properties — position, scale, materials, and more.
- 
-### Content Browser
-Located at the bottom. Your project's library of assets: meshes, textures, sounds, and Blueprints.
 
+
+### **Content Browser**
+
+Everything we create or use in our project goes to content browser, everything from textures, to models to blueprints all sits there.
+
+It is located on the bottom left
+
+![ContentBrowserButton']({6C2351B8-74B6-4245-BB68-501056057A75}.png)
+
+![ContentBrowser]({3B61479B-238D-46FD-A2A8-4398556B5286}.png)
+
+You can create new items by **right clicking** and choosing whatever you wanna make.
+It is often recommended to **clean up your content drawer** so its easy to move around content drawers. 
+
+![ContentBrowser](ContentDrawer.gif)
+
+You can also view and check out engine content but it is generally recommended not to mess around with it without a good knowledge of how the engine works
+
+you can do so by clicking the **gear icon** on the top right of the content drawer and check **engine content**.
+
+![EngineContentEnable]({E8DCED19-855F-4F34-BE55-F4D05F9DE850}.png)
+
+you can go uncheck it if you don't wanna see it in your content drawer. 
+
+### **Play in editor**
+
+To play your game in editor you click the **green icon** at the top or press **Alt + P**
+
+![PlayIcon]({1554BA11-88A9-4FBA-AF8B-01E2E081C9F7}.png)
+
+While playing to break out you can press **Shift + F1** to break your cursor in editor
+Since we dont have a character, we possess a default pawn 
+
+To break out of the play through and view your level we can click the detach icon
+it allows us to view our own character and the level. 
+
+![Detach]({FA54DD72-87FC-46E5-828C-CB607B675B22}.png)
+
+You can also simulate the level by using the simulate button
+
+![SimulateButton]({21DD9D98-AFF5-485B-A6DC-FE669372A3D5}.png)
+
+(This gif below shows the entire playthrough session and how it works)
+
+![SimulateButton](PlayTest.gif)
+
+As of now this all the basics we need to know to get started with unreal engine.
