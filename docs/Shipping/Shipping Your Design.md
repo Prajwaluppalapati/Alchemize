@@ -4,7 +4,7 @@ description: Shiiping your design in Alchemize
 ---
 
 > This doc is written by AI and reviewed by our team.
-> [!WARNING]
+>
 > Projects must contain meaningful completed work before submission. Repositories containing only ideas, placeholder files, AI-generated scaffolding, or less than 1 hour of genuine work may be returned without review.
 >
 > AI assistance is allowed, but AI-generated content must not exceed **30% of the overall project**. Submissions that exceed this limit may be **instantly rejected**.
