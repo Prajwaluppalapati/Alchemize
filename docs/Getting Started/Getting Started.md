@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting Started - Alchemize
 description: Getting Started in Alchemize
 ---
 
