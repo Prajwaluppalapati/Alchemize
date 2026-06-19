@@ -644,7 +644,96 @@ However we still are unable to completely jump. We will handle that in the next 
 
 ### Jumping
 
-jumping is a real doozy as we have many more variables to work with
+jumping is a real doozy as we have many more variables to work with 
+
+We will start off by creating a **new state**. 
+
+Inside of locomotion, drag off idle and create a new state called **jump**
+
+For jump we will use **transitional animations** 
+
+To enable transitional animations, we will click on the transition rule attached and click on **use Transitional Animation**
+
+![EnableTransitionalAnimation](Images/EnableTransitionalAnimation.png)
+
+We will connect **play jumploop** as we do in output animation for **jump**
+
+![PlayJump](Images/PlayJump.png)
+
+In animation wire from **idle** to **jump**, click on **Transitional Rule** and open its **animation graph**
+
+Connect Play JumpStart to the output animation
+
+![PlayJump](Gifs/JumpStart.gif)
+
+Similarly pull the wire back from **Jump** to **Idle**
+
+Enable **Transitional Animation**
+
+Connect **Play JumpEnd**
+
+![PlayJump](Gifs/PlayJumpEnd.gif)
+
+Now we can open up transitional rule and setup our conditions for jump end
+
+![PlayJump](Gifs/SetConditionsForJump.gif)
+
+
+Now when we run, we see that only the running animation goes
+
+to fix that, head into **transitional rule** from running to idle, and add an OR boolean for is falling
+
+![TransitionalRuleForFollowingPart2](Images/TransitionalRuleForFallingP2.png)
+
+This will allow the falling animation to play when we jump while running
+
+
+## Adding Aditional rules and settings
+
+Right now our character doesn't feel snappy and off
+
+we will fix that now
+
+Head into **BP_RedHood** and click on **CharacterMovement**
+
+There go into details panel and do the following
+
+- Search for **Jump Z velocity** and set that to 1600cm/s or 16.0m/s depending on what your units are set to
+
+![SetJumpVelocity](Images/SetJumpVelocity.png)
+
+- Search **Gravity Scale** and set that to 3
+
+![SetGravityScale](Images/SetGravityScale.png)
+
+- Search **Max Acceleration** and set that to 150000
+
+![SetMaxAcceleration](Images/SetMaxAcceleration.png)
+
+## Adding Sounds
+
+In this final section we will finally add sounds, it is easy to add sounds
+
+Head in **AS_RedHood** and open a flipbook
+
+Down in the animation player select the frame where the footstep lands,
+
+Right click on the animation player, under **notifies** --> **Add Notify** --> **Play Sound**
+
+Click on the notify in the player and look in the details panel and select sound
+
+Similarly do this for all animations you have that has Footsteps
+
+![SetMaxAcceleration](Gifs/AddSound.gif)
+
+
+### **CONGRATULATIONS**
+
+You have successfully created a 2D character in Unreal Engine that can run and jump
+
+now you can add platforms using cubes or look up more stuff to do with PaperZD Including tilemaps
+
+It all depends on what you want to do with your own game
 
 
 ## Wrapping Up
