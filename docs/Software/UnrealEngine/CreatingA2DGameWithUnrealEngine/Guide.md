@@ -510,3 +510,153 @@ Go back to your **RedHood** Blueprints folder
 
 **Right click** --> **PaperZD** --> **Animation Blueprint**
 
+Select **BP_RedHood** as the parent class when prompted
+
+Rename it to **AS_Redhood** as we prefix Animation Source with **AS_**
+
+Open it up. You'll see a layout similar to a normal Animation Blueprint, but built for 2D flipbooks instead of skeletal animations.
+
+![AS_RedHood](Images/AS_Redhood.png)
+
+Click **Add New** and then **New Animation Sequence**
+
+This allows a person to add a flipbook to animation.
+
+name it accordingly, go to the details on the right and under animation select any FlipBook
+
+![AS_RedHood](Gifs/AddingAnimationSequence.gif)
+
+Go ahead and do this for all flipbooks we have created
+
+![AS_RedHood](Images/AS_RedHoodFinal.png)
+
+### **ANOTHER SMALL FIX**
+
+Our run animation felt too slow, to fix that go over to our **run flip book**,
+
+Go over to frames per second, and set it to 33
+
+![FramesPerSecond](Images/FramesPerSecond.png)
+
+### **CREATING ANIM BLUEPRINT**
+
+Right click in our Redhood folder and search for PaperZD animation
+
+![SearchForPaperZD](Images/SearchForPaperZD.png)
+
+In the selection window select AS_RedHood and name the Animation Blueprint to ABP_RedHood
+
+There we will see 2 graphs, Anim Graph and Event Graph.
+
+- **Anim Graph**: Where we manage our animations
+- **Event Graph**: Where we manage all the logic
+
+We can hook in any Animation Blueprint to our Anim Graph Result by searching for it.
+
+First we will add it to BP_RedHood tho,
+
+Go back to BP_RedHood, Select Animation Component and go down to PaperZD.
+
+There under **Anim Instance Class** select ABP_RedHood
+
+![AddingABP_Redhood](Images/AddingABP_RedHood.png)
+
+Go back to Event Graph for ABP_Redhood
+
+below **Event OnIt** get **Get owning actor**
+
+From the return value, drag out and **cast to BP_Character** and drag out from as Character and promote to variable
+
+Then from Character, drag out and get **Character Movement** and promote that to variable
+
+Connect all to **execution pins** to **Event OnIt**
+
+Select all and collapse to function called **Store Important Variables**
+
+![StoreImportVars1](Images/StoreImportantVars1.png)
+
+![StoreImportVars2](Images/StoreImportantVars.png)
+
+In **event tick**, we will drag out our **Character** Variable, right click and **convert to validated get**
+
+We will then create three checks,
+
+First create a variable called **IsMoving** and set it to a **Boolean**
+
+Then create a variable **IsFalling** as a **Boolean**
+
+Drag out of **Is Valid** and add a **Sequence** node by searching for it
+
+![SequenceNode](Images/SequenceNode.png)
+
+After that we will create sequences to check whether we are in air or not
+
+![Sequences](Images/SequenceCheck.png)
+
+### SOME NOTES
+
+- To comment we use the **C Key**
+- To Straighten Wires we use the **Q KEY**
+
+Then we can head back into **AnimGraph**, Right click and search for **New State Machine**
+
+Name it **Locomotion** and **double click**, hook it into result and double click to open
+
+![Locomotion](Images/Locomotion.png)
+
+Drag out the out and add a new state, rename it on the details panel to Idle
+
+![IdleState](Images/IdleState.png)
+
+Go inside by double clicking
+
+**Right click** --> Search for **Play Idle** --> Connect to Result
+
+![IdleStateInside](Images/InsideidleState.png)
+
+We can go back out by clicking the **back key** on the top or **clicking on locomotion**
+
+![GoingBackOut](Images/GoingBackOut.png)
+
+Similarly we will drag out of Idle, create new state called running, go inside, attach Play Running to it 
+
+![CreatingRunning](Gifs/CreatingRunning.gif)
+
+After going back out we can see a sort of logo has popped up, that is called a **transition rule**
+
+we can double click on it and open this window
+
+![Transitionrule](Images/TransitionRule.png)
+
+Here we can right click, search for **isMoving** and plug that into **can enter transition**
+
+Before playtesting, we have to go back out to locomotion, drag off running and back into idle so that.
+
+That creates another transition rule, open it
+
+after that get **is moving**, drag off and search for **Not Boolean**, connect the not boolean to can enter transition
+
+![NotBooleantransition](Images/NotMovingTransition.png)
+
+Now if we play test we can see our character animated better as it plays idle animation when idle and moves when moving
+
+However we still are unable to completely jump. We will handle that in the next section
+
+### Jumping
+
+jumping is a real doozy as we have many more variables to work with
+
+
+## Wrapping Up
+
+At this point you have:
+
+- A fully imported and sliced 2D character with idle, run, and three-part jump flipbooks
+- A working Blueprint character using Enhanced Input for movement and jumping, with a custom rotation-based flip rather than a simple branch
+- An Animation Blueprint with a state machine that properly sequences JumpStart --> JumpLoop --> JumpEnd based on movement state and landing
+
+From here, you can expand on this foundation by adding combat (using the hurt/light attack sprites we skipped earlier), parallax backgrounds, checkpoints, or enemy AI using the same PaperZD workflow.
+
+If you have any questions feel free to reach out on Slack @Lemong
+
+With love from lemong <3
