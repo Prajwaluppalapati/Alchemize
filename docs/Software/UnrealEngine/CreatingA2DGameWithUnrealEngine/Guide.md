@@ -266,3 +266,247 @@ For creating a working playable character we will now jump over to BluePrints
 
 Blueprints is unreal engine's own visual scripting language that allows you to do a lot of things
 We discussed a little bit of Blueprints in the Getting Started with unreal engine guide but we will put it to real use over here
+
+We will start off by organizing our folder structure a little bit here
+
+Create three folders:
+
+- **RedHood**: Will contain all blueprints related to our RedHood character
+- **Input**: Will contain all inputs regarding redhood
+- **Game**: Contains the game mode we will use
+
+![BluePrint Folder Structure](Images/BluePrintFolderStructure.png)
+
+Go into **RedHood**
+
+Right click, **Blueprint** --> **Blueprint class**
+
+You should get a menu like this
+
+![BlueprintMenu](Images/BlueprintMenu.png)
+
+These show a bunch of common blueprints but we are not going to work with either of these.
+
+Select the drop down **All Classes** and search for PaperZDCharacter, hit select
+
+Rename the Blueprint to BP_RedHood
+
+This is what will open up
+
+![BlueprintClass](Images/BlueprintClass.png)
+
+Since there are a lot of aspects in a blueprint character, I will tell you the important things only
+
+On the left are **components tab**, these are all the components your character has.
+
+- **Capsule component** is the bounds for your character.
+- **Sprite** Is where the sprite for your character goes, it takes sprite and flipbooks
+- **Animation Component** Handles animation for our character
+- **Character Movement** Handles movement for our character
+
+On the details panel we can start by adding the idle flipbook by clicking sprite, going down to Sprite, clicking Source Flipbook and choosing any animation of your choice
+
+![BlueprintClass](Gifs/AddingSprite.gif)
+
+### A small fix
+
+Here we can see that our sprite is too small, we can rescale the capsule but that messes up our collisions.
+To fix that we will scale up our sprites.
+
+Here's how to do it
+
+go back to **Assets** --> **Redhood** --> **Sprites**
+
+click on the filter button
+
+![FilterButton](Images/FilterButton.png)
+
+Search for sprite and select it
+
+![SpriteSearch](Images/Sprite.png)
+
+Select all by pressing **CTRL + A**
+
+**Right click** --> **Asset Actions** --> **Bulk Edit in property Matrix**
+
+Go under **sprite dropdown**,
+
+here we want to edit the pixels per unit, meaning how many pixels per an unreal unit should the sprite show
+
+Over here we can edit it to be 0.25 and then save all by pressing **CTRL + S**
+
+![SpriteSearch](Gifs/EditPixelsPerUnit.gif)
+
+Then we can go out, right click on the and press remove all filters
+
+and if we go back into BP_RedHood, we can see the sprite is big enough
+
+![RedHoodp2](Images/RedHood2.png)
+
+Click on sprite and add the following to the location
+
+- x = 48
+- y = 0
+- z = 11
+
+Click on the **capsule**,
+
+search for **half height** and set it to 62
+
+
+### **Camera Settings**
+
+Next up we will set up our camera
+
+Go to our **Components**, click on add and add **spring arm**
+
+Then we will click on spring arm and add a **camera**
+
+![RedHoodp2](Gifs/AddingCamera.gif)
+
+Select the **spring arm**, go to its rotation and set the Z axis to -90
+
+![SpringArmRotation](Images/SpringArmRotation.png)
+
+This would cause the camera to look in front directly at the player
+
+### **Adding Game Mode**
+
+Go to the **Game** folder we created inside of Blueprints
+
+**Right Click** --> **Blueprint Class** --> **GameModeBase**
+
+Rename it to **BP_GameMode**
+
+Open it, go over to the details panel, open Default Pawn Class, Search for BP_RedHood and select it
+
+![GameModeSettings](Images/SetGameModeSettings.png)
+
+Hit **CTRL + S** and exit
+
+Next go to Edit --> Project Settings --> Maps & Modes --> Select default game mode as the BP_GameMode
+
+![Set Game Mode](Images/SetGameMode.png)
+
+If we hit play we will possess our BP_RedHood Class
+
+Now we can't move around because we have no input set up, we will do this in the next section
+
+### **Setting up input for the Character**
+
+Unreal Engine uses an **Enhanced Input** system, which separates *what triggers an action* (a key/button) from *what the action does* (Blueprint logic). This makes it easy to remap controls later without touching your character logic.
+
+Go to the **Input** folder we created earlier.
+
+First create a new folder called **Input Actions**
+
+**Right click** --> **Input** --> **Input Action**
+
+Create two of these:
+
+- **IA_Move**
+- **IA_Jump**
+
+For **IA_Move**, open it up and under **Value Type** select **Axis1D (Float)** since we only need left/right movement on a 2D plane
+
+For **IA_Jump**, leave the **Value Type** as **Digital (bool)**
+
+![IA_Jump](Images/IA_Jump.png)
+![IA_Move](Images/IA_Move.png)
+
+press **CTRL + SHIFT + S** to save your progress
+
+Next, **right click** --> **Input** --> **Input Mapping Context**
+
+Name it **IMC_RxedHood**
+
+Open it up and add both **IA_Move** and **IA_Jump**
+
+- For **IA_Move**, add two bindings: **A** and **D** (or **Left** and **Right** arrow keys). Set **A** to **Negate** under the modifiers so pressing it gives -1
+- For **IA_Jump**, bind it to **Space Bar**
+
+![IMCSetup](Gifs/IMCSetup.gif)
+
+### **Adding the Mapping Context**
+
+Open **BP_RedHood**, go to the **Event Graph**
+
+On **Event BeginPlay**, First seperately add **Get player controller**, Drag off the pin and add **Cast to PlayerController**.
+
+From as Player Controller, search for **Enhanced Input Local Player Subsystem**. 
+
+From that drag out and search for **add input mapping**, in **Mapping Context** search for IMC RedHood
+
+![Add MappingContext](Images/AddMappingContext.png)
+
+We can select all the nodes, Right Click, Collapse to Function and rename it to "**Get mapping Context**"
+
+![MovementSetup](Gifs/ConvertToFunction.gif)
+
+### **Handling Movement**
+
+Still in the **Event Graph**, right click and add an **Enhanced Input Action IA_Move** node
+
+From the **Triggered** pin, drag off the **Action Value** (Axis1D float) and plug it into **Add Movement Input**
+
+For **Add Movement Input** you'll need:
+- **World Direction**: Get **Actor Forward Vector** (since we're in 2D, this will just move along X)
+- **Scale Value**: plug in the Axis1D value from IA_Move
+
+Set **World Direction** in Add Movement input to 1 in the **X Axis**
+
+![AddInputMovement](Images/AddMovementInput.png)
+
+Since RedHood only has animations facing one direction, we need to flip the sprite when moving the opposite way.
+
+Off the same **Action Value** from IA_Move, plug it into a **Branch** (using a >= 0 check)
+
+- If **true** (moving right), set the **Sprite's Relative Rotation** Yaw to **0**
+- If **false** (moving left), set the **Sprite's Relative Rotation** Yaw to **180**
+
+We will create a new function by going to the functions tab and pressing +
+
+Rename the function to **RotateController**
+
+From our character movement component, we will get current acceleration. On the yellow pin, we will right click and **select split struc** pin. This divides our output from a single vector to 3 floats
+
+We will drag out of the RotateController pin and search for **Compare float**, we will drag **Return Value X** into the **input** and leave **compare with** to 0
+
+Then we will right click, search for **Get Controller**, and out of the **Return Value**, we will search for **Set control rotation**
+
+we will copy and paste this below it and drag pins from both > and < into their respective pins 
+
+On the < pin we will set **New Rotation Z** to 180
+
+![RotateController](Images/RotateController.png)
+
+Select **Spring Arm**, Go under Camera settings and disable **Inherit Pitch, Yaw and Roll**
+
+![DisablePitchYawAndRoll](Images/DisablePitchYawAndRoll.png)
+
+We will close the window for the given function and go out to the main window where we will connect this IA_MOVE
+
+![IA_MOVE](Images/IA_MoveFinal.png)
+
+### **Handling Jump**
+
+Add an **Enhanced Input Action IA_Jump** node
+
+Off the **Triggered** pin, call the **Jump** function (this is a built-in Character function)
+
+Off the **Completed** pin (released), call **Stop Jumping**
+
+![JumpSetup](Images/IA_Jump.png)
+
+Hit **Play**, and you should now be able to move left/right and jump with your character flipping appropriately
+
+**Press CTRL + S to save everything**
+
+## Creating the Animation Blueprint
+
+Now that movement works, we want our flipbooks to actually play depending on what the character is doing. This is where **PaperZD's Animation Blueprint** comes in.
+
+Go back to your **RedHood** Blueprints folder
+
+**Right click** --> **PaperZD** --> **Animation Blueprint**
+
