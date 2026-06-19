@@ -165,5 +165,104 @@ We want to go ahead and do this with the rest of the sprite sheets we have until
 
 Click on extract and lets now convert them to animations
 
+### **Creating FlipBooks**
+
+In Unreal Engine, a flipbook is a 2D sprite animation asset, part of the **Paper2D** plugin. It works basically like a digital flipbook/sprite sheet animation.
+
+a sequence of sprite frames played in order to create the illusion of motion, similar to how 2D games handle animation
+
+Before doing that let us clean up our folders structure a little as well. Open up the content **Browser** and open the **redhood** folder
+
+Inside of **Redhood** create two folders, one called **Sprites** and the other called **FlipBooks**
+
+![FolderStrucForRedHood](Images/FolderStruc.png)
+
+The shift the **Idle**, **Jump** and **Run** folder inside of sprites
+
+![CleaningFolders](Gifs/CleaningFolders.gif)
 
 
+To create flipbooks let us start by going into the sprites folder and let us start with idle animation
+
+Select all the sprites beside sprite sheet
+
+**Right click** and select **create flipbook**
+
+You will get a flipbook with an option to rename it. You can keep whatever you want it's name to be
+
+Generally I prefix flipbook with **FB_**, so I named it as **FB_Idle**
+
+(In the GIF I accidentally renamed it as running, it is the idle animation)
+
+### In Unreal engine we generally prefix assets with a letter or two to know better what kind of asset we are using, it also makes it easier to search
+
+![CreatingFlipbook](Gifs/CreatingFB_Idle.gif)
+
+We can then drag and drop this over to our **Flipbooks folder**
+
+
+Similarly we can do the exact same process with run
+
+Go over to **run folder**, select all sprites besides sprite sheet
+
+right click, **create flipbook**
+
+rename it to **FB_Run**, and then move it over to the **flipbooks** folder
+
+If the animation feels slow, dont worry about it we will fix it soon
+
+This is what your Flipbooks folder should look like now
+
+![FlipBooks](Images/FlipbooksFolder.png)
+
+Now let us create jump animation, jump animation works a little differently.
+Even tho you can do the same thing, we want to divide our jump animation into 3 seperate parts
+
+- **Jump start**: Plays at the start of jump
+- **Jump loop**: Plays while in the air
+- **Jump end**: Plays when a player lands
+
+To do this, we will first create a normal Flipbook, and open it up
+
+![FlipBookEditor](Images/FlipBookEditor.png)
+
+This is what a flipbook editor looks like.
+
+here you can control how fast the animation goes, key frames, default material etc.
+
+We will not discuss this right now but rather focus on how can we divide these animations
+
+At the bottom we have the the **animation player**, there we can adjust the player and make out where each animation starts.
+
+You can play around with your choice but here is what came out for me after messing around with the anim player
+
+- **Jump Start**: Jump starts from frame 0 - 3
+- **Jump Loop**: Remains from frames 4 - 14
+- **Jump End**: Remains from 15 to 18
+
+Now we will go back to our sprites player, and select frames 0 - 3
+
+![SelectFrames0and3](Images/JumpStartFrames.png)
+
+**Right Click** --> **Create FlipBook**
+
+name it to **FB_JumpStart**
+
+Similarly we will select frames 4 - 14
+
+Create flipbook, rename it to **FB_JumpLoop**
+
+and finally select frames 15 - 18
+
+Create flipbook, rename it to **FB_JumpEnd**
+
+Then you can delete the entire jump flipbook and migrate the three flipbooks over to the Flipbooks folder
+
+![FlipBooksRedHoodFolder](Images/RedHoodFlipbooksFolder.png)
+
+## Creating BP_RedHood
+
+For creating a working playable character we will now jump over to BluePrints
+
+Blueprints is unreal engine's own visual scripting language that allows you to do a lot of things
+We discussed a little bit of Blueprints in the Getting Started with unreal engine guide but we will put it to real use over here
